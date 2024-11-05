@@ -1,8 +1,8 @@
-# react-native-text-plus [中文](README_CN.md)
+# react-native-text-plus [English](README_CN.md)
 
-A React Native component for text with gradient and text style attributes.
+一个React Native组件，用于文本的渐变色和样式属性。
 
-## Installation
+## 安装
 
 ### npm
 
@@ -16,7 +16,7 @@ npm install react-native-text-plus
 yarn add react-native-text-plus
 ```
 
-## Usage
+## 使用
 
 ```tsx
 import { Text, TextContextProvider } from 'react-native-text-plus';
@@ -26,22 +26,22 @@ import { Text, TextContextProvider } from 'react-native-text-plus';
 <TextContextProvider value={{
   fontSize: 14,
   fontFamily: '...',
-  ... // same as Text style
+  ... // 和Text的样式属性一样
 }}>
   <View>
     <Text
-      // text attributes
+      // text 属性
       fontWeight="bold"
-      // ... as Text style and Text props
+      // ... 可以设置Text的样式属性
       style={{
-        // only work for Text
+        // 只对Text样式有作用
       }}
       // text attributes end
 
-      // gradient attributes
-      colors={['#000', '#fff']} // for gradient
+      // 渐变属性
+      colors={['#000', '#fff']}
       start={{ x: 0, y: 0 }}
-      //...  gradient attributes only work with colors, same as LinearGradient props
+      //...  渐变属性仅当有colors时才有效，与LinearGradient props相同
       // end
       // locations
       // useAngle
@@ -56,13 +56,13 @@ import { Text, TextContextProvider } from 'react-native-text-plus';
 
 ```
 
-## Dependencies
+## 依赖项
 
 > "@react-native-masked-view/masked-view": "^0.3.0",
 >
 > "react-native-linear-gradient": "^2.8.0"
 >
-> // if you need lower version dependencies, please PR or issue
+> // 如果需要较低版本的依赖关系，请PR或问题
 
 ## Contributing
 
