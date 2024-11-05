@@ -48,7 +48,15 @@
   "keywords": [
     "react-native",
     "ios",
-    "android"
+    "android",
+    "react-native-text",
+    "react-native-gradient-text",
+    "linear-gradient",
+    "text-gradient",
+    "text-gradient-color",
+    "gradient",
+    "linear-text-gradient",
+    "text"
   ],
   "repository": {
     "type": "git",
