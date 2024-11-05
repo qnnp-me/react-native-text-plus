@@ -3220,7 +3220,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-native-masked-view/masked-view@npm:^0.3.2":
+"@react-native-masked-view/masked-view@npm:^0.3.0":
   version: 0.3.2
   resolution: "@react-native-masked-view/masked-view@npm:0.3.2"
   peerDependencies:
@@ -12614,7 +12614,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-linear-gradient@npm:^2.8.3":
+"react-native-linear-gradient@npm:^2.8.0":
   version: 2.8.3
   resolution: "react-native-linear-gradient@npm:2.8.3"
   peerDependencies:
@@ -12646,7 +12646,7 @@ __metadata:
   dependencies:
     "@commitlint/config-conventional": ^17.0.2
     "@evilmartians/lefthook": ^1.5.0
-    "@react-native-masked-view/masked-view": ^0.3.2
+    "@react-native-masked-view/masked-view": ^0.3.0
     "@react-native/eslint-config": ^0.73.1
     "@release-it/conventional-changelog": ^5.0.0
     "@types/jest": ^29.5.5
@@ -12661,12 +12661,14 @@ __metadata:
     react: 18.2.0
     react-native: 0.74.5
     react-native-builder-bob: ^0.30.3
-    react-native-linear-gradient: ^2.8.3
+    react-native-linear-gradient: ^2.8.0
     release-it: ^15.0.0
     typescript: ^5.2.2
   peerDependencies:
+    "@react-native-masked-view/masked-view": ^0.3.0
     react: "*"
     react-native: "*"
+    react-native-linear-gradient: ^2.8.0
   languageName: unknown
   linkType: soft
 

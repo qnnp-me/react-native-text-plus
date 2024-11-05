@@ -87,8 +87,10 @@
     "@types/react": "^18.2.44"
   },
   "peerDependencies": {
+    "@react-native-masked-view/masked-view": "^0.3.0",
     "react": "*",
-    "react-native": "*"
+    "react-native": "*",
+    "react-native-linear-gradient": "^2.8.0"
   },
   "workspaces": [
     "example"
@@ -184,7 +186,7 @@
     "version": "0.42.2"
   },
   "dependencies": {
-    "@react-native-masked-view/masked-view": "^0.3.2",
-    "react-native-linear-gradient": "^2.8.3"
+    "@react-native-masked-view/masked-view": "^0.3.0",
+    "react-native-linear-gradient": "^2.8.0"
   }
 }
