@@ -59,9 +59,8 @@ export type TextPlusProps = TextProps &
 export const Text = (props: TextPlusProps) => {
   const context = useContext(TextContext);
   const textProps: TextProps = {
-    ...omitObj(context, textStylePick, textPropsPick),
-    ...omitObj(props, textStylePick, textPropsPick, linearGradientPropsPick),
-    allowFontScaling: props.allowFontScaling ?? true,
+    ...omitObj(context, textStylePick),
+    ...omitObj(props, textStylePick, linearGradientPropsPick),
     style: {
       ...pickObj(context, textStylePick),
       ...pickObj(props, textStylePick),
