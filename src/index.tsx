@@ -3,7 +3,7 @@ import MaskedView from '@react-native-masked-view/masked-view';
 import LinearGradient, {
   type LinearGradientProps,
 } from 'react-native-linear-gradient';
-import { createContext, useContext } from 'react';
+import { createContext, type ReactNode, useContext } from 'react';
 
 const textStylePick = [
   'color',
@@ -95,16 +95,31 @@ export function Text(props: TextPlusProps) {
   );
 }
 
-export const TextContext = createContext<
-  Pick<TextStyle, (typeof textStylePick)[number]> &
-    Pick<TextProps, (typeof textPropsPick)[number]>
->({});
-export const TextContextProvider = TextContext.Provider;
-export const Provider = TextContext.Provider;
+type ContextType = Pick<TextStyle, (typeof textStylePick)[number]> &
+  Pick<TextProps, (typeof textPropsPick)[number]>;
+export const TextContext = createContext<ContextType>({});
+export const Provider = ({
+  children,
+}: {
+  children: ReactNode;
+  value: ContextType;
+}) => {
+  const preContext = useContext(TextContext);
+  return (
+    <TextContext.Provider
+      value={{
+        ...preContext,
+      }}
+    >
+      {children}
+    </TextContext.Provider>
+  );
+};
+export const TextContextProvider = Provider;
 export const Context = TextContext;
-Text.prototype.Provider = TextContext.Provider;
-Text.prototype.Context = TextContext;
+Text.Provider = Provider;
+Text.Context = TextContext;
 export default Text as typeof Text & {
-  Provider: typeof TextContext.Provider;
+  Provider: typeof Provider;
   Context: typeof TextContext;
 };
