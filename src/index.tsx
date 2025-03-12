@@ -93,8 +93,11 @@ export const Text = (props: TextPlusProps) => {
     <RNText {...textProps} />
   );
 };
-const TextContext = createContext<
+export const TextContext = createContext<
   Pick<TextStyle, (typeof textStylePick)[number]> &
     Pick<TextProps, (typeof textPropsPick)[number]>
 >({});
 export const TextContextProvider = TextContext.Provider;
+export const Provider = TextContext.Provider;
+export const Context = TextContext;
+export default Text;
