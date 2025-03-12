@@ -57,7 +57,7 @@ export type TextPlusProps = TextProps &
   Pick<TextStyle, (typeof textStylePick)[number]> &
   Pick<TextProps, (typeof textPropsPick)[number]>;
 
-export function Text(props: TextPlusProps) {
+export const Text = (props: TextPlusProps) => {
   const context = useContext(TextContext);
   const textProps: TextProps = {
     ...omitObj(context, textStylePick),
@@ -93,13 +93,14 @@ export function Text(props: TextPlusProps) {
   ) : (
     <RNText {...textProps} />
   );
-}
+};
 
 type ContextType = Pick<TextStyle, (typeof textStylePick)[number]> &
   Pick<TextProps, (typeof textPropsPick)[number]>;
 export const TextContext = createContext<ContextType>({});
 export const Provider = ({
   children,
+  value,
 }: {
   children: ReactNode;
   value: ContextType;
@@ -109,6 +110,7 @@ export const Provider = ({
     <TextContext.Provider
       value={{
         ...preContext,
+        ...value,
       }}
     >
       {children}
