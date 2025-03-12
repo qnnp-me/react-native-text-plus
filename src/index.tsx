@@ -38,65 +38,14 @@ const linearGradientPropsPick = [
   'angleCenter',
   'angle',
 ] as const;
-const omitObj = <T extends object, K extends keyof T>(
-  obj: T,
-  ...keys: Array<K | readonly K[]>
-) =>
-  Object.fromEntries(
-    Object.entries(obj).filter(([k]) => !keys.flat().includes(k as K))
-  );
-const pickObj = <T extends object, K extends keyof T>(
-  obj: T,
-  ...keys: Array<K | readonly K[]>
-) =>
-  Object.fromEntries(
-    Object.entries(obj).filter(([k]) => keys.flat().includes(k as K))
-  );
 export type TextPlusProps = TextProps &
   Partial<Pick<LinearGradientProps, (typeof linearGradientPropsPick)[number]>> &
   Pick<TextStyle, (typeof textStylePick)[number]> &
   Pick<TextProps, (typeof textPropsPick)[number]>;
 
-export const Text = (props: TextPlusProps) => {
-  const context = useContext(TextContext);
-  const textProps: TextProps = {
-    ...omitObj(context, textStylePick),
-    ...omitObj(props, textStylePick, linearGradientPropsPick),
-    style: {
-      ...pickObj(context, textStylePick),
-      ...pickObj(props, textStylePick),
-      ...(props.style as any),
-    },
-  };
-  return props.colors ? (
-    <MaskedView
-      maskElement={
-        <RNText
-          {...textProps}
-          style={{
-            ...(textProps.style as any),
-            backgroundColor: 'transparent',
-            color: '#000',
-          }}
-        />
-      }
-    >
-      <LinearGradient
-        {...(pickObj(props, linearGradientPropsPick) as LinearGradientProps)}
-      >
-        <RNText
-          {...textProps}
-          style={{ ...(textProps.style as object), opacity: 0 }}
-        />
-      </LinearGradient>
-    </MaskedView>
-  ) : (
-    <RNText {...textProps} />
-  );
-};
-
 type ContextType = Pick<TextStyle, (typeof textStylePick)[number]> &
   Pick<TextProps, (typeof textPropsPick)[number]>;
+
 export const TextContext = createContext<ContextType>({});
 export const Provider = ({
   children,
@@ -119,9 +68,76 @@ export const Provider = ({
 };
 export const TextContextProvider = Provider;
 export const Context = TextContext;
+export const Text = (props: TextPlusProps) => {
+  const context = useContext(TextContext);
+  const textProps: TextProps = {
+    ...omitObj(context, textStylePick),
+    ...omitObj(props, textStylePick, linearGradientPropsPick),
+    style: {
+      ...pickObj(context, textStylePick),
+      ...pickObj(props, textStylePick),
+      ...(props.style as any),
+    },
+  };
+  return (
+    <Provider
+      value={{
+        ...context,
+        ...pickObj(props, textStylePick),
+      }}
+    >
+      {props.colors ? (
+        <RNText>
+          <MaskedView
+            style={{ flex: 0 }}
+            maskElement={
+              <RNText
+                {...textProps}
+                style={{
+                  ...(textProps.style as any),
+                  backgroundColor: 'transparent',
+                  color: '#000',
+                }}
+              />
+            }
+          >
+            <LinearGradient
+              {...(pickObj(
+                props,
+                linearGradientPropsPick
+              ) as LinearGradientProps)}
+            >
+              <RNText
+                {...textProps}
+                style={{ ...(textProps.style as object), opacity: 0 }}
+              />
+            </LinearGradient>
+          </MaskedView>
+        </RNText>
+      ) : (
+        <RNText {...textProps} />
+      )}
+    </Provider>
+  );
+};
 Text.Provider = Provider;
 Text.Context = TextContext;
 export default Text as typeof Text & {
   Provider: typeof Provider;
   Context: typeof TextContext;
 };
+
+const omitObj = <T extends object, K extends keyof T>(
+  obj: T,
+  ...keys: Array<K | readonly K[]>
+) =>
+  Object.fromEntries(
+    Object.entries(obj).filter(([k]) => !keys.flat().includes(k as K))
+  );
+const pickObj = <T extends object, K extends keyof T>(
+  obj: T,
+  ...keys: Array<K | readonly K[]>
+) =>
+  Object.fromEntries(
+    Object.entries(obj).filter(([k]) => keys.flat().includes(k as K))
+  );
