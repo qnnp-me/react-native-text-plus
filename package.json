@@ -1,6 +1,6 @@
 {
   "name": "react-native-text-plus",
-  "version": "0.2.6",
+  "version": "0.2.7",
   "description": "react-native-text-plus",
   "source": "./src/index.tsx",
   "main": "./lib/commonjs/index.js",
