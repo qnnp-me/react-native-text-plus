@@ -56,7 +56,8 @@ export type TextPlusProps = TextProps &
   Partial<Pick<LinearGradientProps, (typeof linearGradientPropsPick)[number]>> &
   Pick<TextStyle, (typeof textStylePick)[number]> &
   Pick<TextProps, (typeof textPropsPick)[number]>;
-export const Text = (props: TextPlusProps) => {
+
+export function Text(props: TextPlusProps) {
   const context = useContext(TextContext);
   const textProps: TextProps = {
     ...omitObj(context, textStylePick),
@@ -92,7 +93,8 @@ export const Text = (props: TextPlusProps) => {
   ) : (
     <RNText {...textProps} />
   );
-};
+}
+
 export const TextContext = createContext<
   Pick<TextStyle, (typeof textStylePick)[number]> &
     Pick<TextProps, (typeof textPropsPick)[number]>
