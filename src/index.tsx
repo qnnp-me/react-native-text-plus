@@ -100,4 +100,9 @@ export const TextContext = createContext<
 export const TextContextProvider = TextContext.Provider;
 export const Provider = TextContext.Provider;
 export const Context = TextContext;
-export default Text;
+Text.prototype.Provider = TextContext.Provider;
+Text.prototype.Context = TextContext;
+export default Text as typeof Text & {
+  Provider: typeof TextContext.Provider;
+  Context: typeof TextContext;
+};
